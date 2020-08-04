@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var content = document.querySelector("#body-content");
 
         if (page === "home") {
-          getArticles();
+          getKlasemenLiga();
         } else if (page === "saved") {
           getSavedArticles();
         }

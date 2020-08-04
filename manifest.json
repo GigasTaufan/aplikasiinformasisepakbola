@@ -1,14 +1,14 @@
 {
-    "name": "My First PWA",
-    "short_name": "My PWA",
-    "description": "Aplikasi PWA pertama saya",
+    "name": "Premier League",
+    "short_name": "PL",
+    "description": "Aplikasi Premier League",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#00897B",
-    "theme_color": "#00897B",
+    "background_color": "#ef9a9a",
+    "theme_color": "#ef9a9a",
     "icons": [
         {
-            "src": "icon.png",
+            "src": "images/icon.png",
             "sizes": "512x512",
             "type": "image/png"
         }

@@ -1,4 +1,17 @@
-var base_url = "https://readerapi.codepolitan.com/";
+const konfigurasi = {
+  base_url: 'https://api.football-data.org/v2/',
+  api_token: '89e4a375e3f74c819e36b74a5065fcb8',
+  league_id: '2021'
+}
+
+let fetchData = (url) => {
+  return fetch(url, {
+    // method: "GET",
+    headers: {
+      'X-Auth-Token': konfigurasi.api_token
+    }
+  })
+}
 
 // Blok kode yang akan di panggil jika fetch berhasil
 function status(response) {
@@ -24,59 +37,65 @@ function error(error) {
 }
 
 // Blok kode untuk melakukan request data json
-function getArticles() {
+function getKlasemenLiga() {
   if ("caches" in window) {
-    caches.match(base_url + "articles").then(function (response) {
+    caches.match(konfigurasi.base_url + "competitions/2021/standings").then(function (response) {
       if (response) {
         response.json().then(function (data) {
-          var articlesHTML = "";
-          data.result.forEach(function (article) {
-            articlesHTML += `
-                  <div class="card">
-                    <a href="./article.html?id=${article.id}">
-                      <div class="card-image waves-effect waves-block waves-light">
-                        <img src="${article.thumbnail}" />
-                      </div>
-                    </a>
-                    <div class="card-content">
-                      <span class="card-title truncate">${article.title}</span>
-                      <p>${article.description}</p>
-                    </div>
-                  </div>
-                `;
-          });
+          console.log(data);
+          // var articlesHTML = "";
+          // data.result.forEach(function (article) {
+          //   articlesHTML += `
+          //         <table class="responsive-table highlight">
+          //           <thead>
+          //             <tr>
+          //                 <th>Name</th>
+          //                 <th>Item Name</th>
+          //                 <th>Item Price</th>
+          //             </tr>
+          //           </thead>
+          //           <tbody>
+          //             <tr>
+          //               <td>Alvin</td>
+          //               <td>Eclair</td>
+          //               <td>$0.87</td>
+          //             </tr>
+          //           </tbody>
+          //         </table>
+          //       `;
+          // });
           // Sisipkan komponen card ke dalam elemen dengan id #content
-          document.getElementById("articles").innerHTML = articlesHTML;
+          // document.getElementById("articles").innerHTML = articlesHTML;
         });
       }
     });
   }
 
-  fetch(base_url + "articles")
+  fetchData(konfigurasi.base_url + "competitions/2021/standings")
     .then(status)
     .then(json)
     .then(function (data) {
       // Objek/array JavaScript dari response.json() masuk lewat data.
-
+      console.log(data);
       // Menyusun komponen card artikel secara dinamis
-      var articlesHTML = "";
-      data.result.forEach(function (article) {
-        articlesHTML += `
-              <div class="card">
-                <a href="./article.html?id=${article.id}">
-                  <div class="card-image waves-effect waves-block waves-light">
-                    <img src="${article.thumbnail}" />
-                  </div>
-                </a>
-                <div class="card-content">
-                  <span class="card-title truncate">${article.title}</span>
-                  <p>${article.description}</p>
-                </div>
-              </div>
-            `;
-      });
+      // var articlesHTML = "";
+      // data.result.forEach(function (article) {
+      //   articlesHTML += `
+      //         <div class="card">
+      //           <a href="./article.html?id=${article.id}">
+      //             <div class="card-image waves-effect waves-block waves-light">
+      //               <img src="${article.thumbnail}" />
+      //             </div>
+      //           </a>
+      //           <div class="card-content">
+      //             <span class="card-title truncate">${article.title}</span>
+      //             <p>${article.description}</p>
+      //           </div>
+      //         </div>
+      //       `;
+      // });
       // Sisipkan komponen card ke dalam elemen dengan id #content
-      document.getElementById("articles").innerHTML = articlesHTML;
+      // document.getElementById("articles").innerHTML = articlesHTML;
     })
     .catch(error);
 }
