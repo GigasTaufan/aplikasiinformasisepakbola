@@ -156,7 +156,7 @@ function getArticleById() {
   })
 }
 
-function getSavedArticles() {
+function getSavedTimFavorit() {
   getAll().then(function (articles) {
     console.log(articles);
     // Menyusun komponen card artikel secara dinamis

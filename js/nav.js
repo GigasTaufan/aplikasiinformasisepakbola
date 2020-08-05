@@ -48,8 +48,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (page === "home") {
           getKlasemenLiga();
-        } else if (page === "saved") {
-          getSavedArticles();
+        } else if (page === "tim_favorit") {
+          getSavedTimFavorit();
         }
 
         if (this.status == 200) {
