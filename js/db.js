@@ -55,7 +55,7 @@ function getById(id) {
     });
 }
 
-function deleteFavTeam(team) {
+function deleteTimFav(team) {
     dbPromised
         .then(function (db) {
             let tx = db.transaction('teams', 'readwrite');

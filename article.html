@@ -90,37 +90,37 @@
       var urlParams = new URLSearchParams(window.location.search);
       var id = Number(urlParams.get('id'));
 
-      var save = document.getElementById('save');
-      var del = document.getElementById('delete');
+      var btnSave = document.getElementById('save');
+      var btnDel = document.getElementById('delete');
 
       var tim = getTimById();
 
       getById(id)
         .then((msg) => {
           console.log(msg);
-          save.style.display = 'none';
-          del.style.display = 'block';
+          btnSave.style.display = 'none';
+          btnDel.style.display = 'block';
         })
         .catch((msg) => {
           console.log(msg);
-          save.style.display = 'block';
-          del.style.display = 'none';
+          btnSave.style.display = 'block';
+          btnDel.style.display = 'none';
         });
 
-      del.onclick = function () {
+      btnDel.onclick = function () {
         console.log('Tombol delete di klik.');
-        deleteFavTeam(id);
-        del.style.display = 'none';
-        save.style.display = 'block';
+        deleteTimFav(id);
+        btnDel.style.display = 'none';
+        btnSave.style.display = 'block';
       };
 
-      save.onclick = function () {
+      btnSave.onclick = function () {
         console.log('Tombol FAB di klik.');
         tim.then(function (article) {
           saveForLater(article);
         });
-        save.style.display = 'none';
-        del.style.display = 'block';
+        btnSave.style.display = 'none';
+        btnDel.style.display = 'block';
       };
     });
   </script>
