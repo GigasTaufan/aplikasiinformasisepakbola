@@ -275,20 +275,24 @@ function getSavedTimFavorit() {
     // Menyusun komponen card artikel secara dinamis
     var articlesHTML = "";
     articles.forEach(function (article) {
-      var description = article.post_content.substring(0, 100);
+      let urlTeamImage = article.crestUrl;
+      if (urlTeamImage == null || urlTeamImage == '') {
+        urlTeamImage = 'https://via.placeholder.com/350';
+      } else {
+        urlTeamImage = urlTeamImage.replace(/^http:\/\//i, 'https://');
+      }
       articlesHTML += `
-                  <div class="card">
-                    <a href="./article.html?id=${article.ID}&saved=true">
+                  <div class="card" style="width:200px">
+                    <a href="./article.html?id=${article.id}">
                       <div class="card-image waves-effect waves-block waves-light">
-                        <img src="${article.cover}" />
+                        <img class="responsive-img" style="height:200px" src="${urlTeamImage}"/>
                       </div>
                     </a>
                     <div class="card-content">
-                      <span class="card-title truncate">${article.post_title}</span>
-                      <p>${description}</p>
+                      <span class="card-title center-align">${article.name}</span>
                     </div>
                   </div>
-                `;
+      `;
     });
     // Sisipkan komponen card ke dalam elemen dengan id #body-content
     document.getElementById("body-content").innerHTML = articlesHTML;
@@ -302,13 +306,14 @@ function getSavedArticleById() {
   getById(idParam).then(function (article) {
     articleHTML = '';
     var articleHTML = `
-      <div class="card">
-        <div class="card-image waves-effect waves-block waves-light">
-          <img src="${article.cover}" />
-        </div>
+      <div class="card" style="width:200px">
+        <a href="./article.html?id=${article.id}">
+          <div class="card-image waves-effect waves-block waves-light">
+            <img class="responsive-img" style="height:200px" src="${urlTeamImage}"/>
+          </div>
+        </a>
         <div class="card-content">
-          <span class="card-title">${article.post_title}</span>
-          ${snarkdown(article.post_content)}
+          <span class="card-title center-align">${article.name}</span>
         </div>
       </div>
     `;
