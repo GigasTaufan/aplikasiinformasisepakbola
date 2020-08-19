@@ -42,30 +42,24 @@ function getKlasemenLiga() {
     caches.match(konfigurasi.base_url + "competitions/2021/standings").then(function (response) {
       if (response) {
         response.json().then(function (data) {
-          console.log(data);
-          // var articlesHTML = "";
-          // data.result.forEach(function (article) {
-          //   articlesHTML += `
-          //         <table class="responsive-table highlight">
-          //           <thead>
-          //             <tr>
-          //                 <th>Name</th>
-          //                 <th>Item Name</th>
-          //                 <th>Item Price</th>
-          //             </tr>
-          //           </thead>
-          //           <tbody>
-          //             <tr>
-          //               <td>Alvin</td>
-          //               <td>Eclair</td>
-          //               <td>$0.87</td>
-          //             </tr>
-          //           </tbody>
-          //         </table>
-          //       `;
-          // });
+          // console.log(data);
+          var articlesHTML = "";
+          data.standings[0].table.forEach(function (article) {
+            articlesHTML += `
+                  <tr>
+                      <td>${article.position}</td>
+                      <td>${article.team.name}</td>
+                      <td>${article.playedGames}</td>
+                      <td>${article.won}</td>
+                      <td>${article.draw}</td>
+                      <td>${article.lost}</td>
+                      <td>${article.points}</td>
+                      <td><a class="waves-effect waves-light btn">Detail</a></td>
+                    </tr>
+                `;
+          });
           // Sisipkan komponen card ke dalam elemen dengan id #content
-          // document.getElementById("articles").innerHTML = articlesHTML;
+          document.getElementById("tim").innerHTML = articlesHTML;
         });
       }
     });
@@ -76,31 +70,31 @@ function getKlasemenLiga() {
     .then(json)
     .then(function (data) {
       // Objek/array JavaScript dari response.json() masuk lewat data.
-      console.log(data);
+      // console.log(data);
       // Menyusun komponen card artikel secara dinamis
-      // var articlesHTML = "";
-      // data.result.forEach(function (article) {
-      //   articlesHTML += `
-      //         <div class="card">
-      //           <a href="./article.html?id=${article.id}">
-      //             <div class="card-image waves-effect waves-block waves-light">
-      //               <img src="${article.thumbnail}" />
-      //             </div>
-      //           </a>
-      //           <div class="card-content">
-      //             <span class="card-title truncate">${article.title}</span>
-      //             <p>${article.description}</p>
-      //           </div>
-      //         </div>
-      //       `;
-      // });
+      var articlesHTML = "";
+      data.standings[0].table.forEach(function (article) {
+        articlesHTML += `
+                    <tr>
+                      <td>${article.position}</td>
+                      <td>${article.team.name}</td>
+                      <td>${article.playedGames}</td>
+                      <td>${article.won}</td>
+                      <td>${article.draw}</td>
+                      <td>${article.lost}</td>
+                      <td>${article.points}</td>
+                      <td><a class="waves-effect waves-light btn">Detail</a></td>
+                    </tr>
+                `;
+      });
       // Sisipkan komponen card ke dalam elemen dengan id #content
-      // document.getElementById("articles").innerHTML = articlesHTML;
+      document.getElementById("tim").innerHTML = articlesHTML;
+      // console.log(document.getElementById("articles"));
     })
     .catch(error);
 }
 
-function getArticleById() {
+function getTimById() {
   return new Promise(function (resolve, reject) {
     // Ambil nilai query parameter (?id=)
     var urlParams = new URLSearchParams(window.location.search);

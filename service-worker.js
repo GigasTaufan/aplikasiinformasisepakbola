@@ -12,7 +12,9 @@ var urlsToCache = [
   "/manifest.json",
   "/js/nav.js",
   "/js/api.js",
-  "/images/icon.png"
+  "/images/icon.png",
+  "/images/icon-192.png",
+  "/images/icon-512.png"
 ];
 
 self.addEventListener("install", function (event) {
@@ -24,7 +26,7 @@ self.addEventListener("install", function (event) {
 });
 
 self.addEventListener("fetch", function (event) {
-  var base_url = "https://readerapi.codepolitan.com/";
+  var base_url = "https://api.football-data.org/v2/";
 
   if (event.request.url.indexOf(base_url) > -1) {
     event.respondWith(
@@ -37,7 +39,9 @@ self.addEventListener("fetch", function (event) {
     );
   } else {
     event.respondWith(
-      caches.match(event.request, { ignoreSearch: true }).then(function (response) {
+      caches.match(event.request, {
+        ignoreSearch: true
+      }).then(function (response) {
         return response || fetch(event.request);
       })
     )
