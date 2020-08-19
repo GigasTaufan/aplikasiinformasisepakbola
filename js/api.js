@@ -39,22 +39,36 @@ function error(error) {
 // Blok kode untuk melakukan request data json
 function getKlasemenLiga() {
   if ("caches" in window) {
-    caches.match(konfigurasi.base_url + "competitions/2021/standings").then(function (response) {
+    caches.match(konfigurasi.base_url + "competitions/2021/standings?standingType=TOTAL").then(function (response) {
       if (response) {
         response.json().then(function (data) {
           // console.log(data);
           var articlesHTML = "";
           data.standings[0].table.forEach(function (article) {
+            let urlTeamImage = article.team.crestUrl;
+            if (urlTeamImage == null || urlTeamImage == '') {
+              urlTeamImage = 'https://via.placeholder.com/350';
+            } else {
+              urlTeamImage = urlTeamImage.replace(/^http:\/\//i, 'https://');
+            }
             articlesHTML += `
                   <tr>
                       <td>${article.position}</td>
-                      <td>${article.team.name}</td>
+                      <td>
+                        <ul style="margin:0">
+                          <a href="./article.html?id=${article.team.id}">
+                            <li class="collection-item avatar" style="display:flex;align-items:center">
+                              <img src="${urlTeamImage}" width="15px" alt="" class="circle"> &emsp;
+                              <span class="title">${article.team.name}</span>
+                            </li>
+                          </a>
+                        </ul>
+                      </td>
                       <td>${article.playedGames}</td>
                       <td>${article.won}</td>
                       <td>${article.draw}</td>
                       <td>${article.lost}</td>
                       <td>${article.points}</td>
-                      <td><a class="waves-effect waves-light btn">Detail</a></td>
                     </tr>
                 `;
           });
@@ -65,7 +79,7 @@ function getKlasemenLiga() {
     });
   }
 
-  fetchData(konfigurasi.base_url + "competitions/2021/standings")
+  fetchData(konfigurasi.base_url + "competitions/2021/standings?standingType=TOTAL")
     .then(status)
     .then(json)
     .then(function (data) {
@@ -74,16 +88,30 @@ function getKlasemenLiga() {
       // Menyusun komponen card artikel secara dinamis
       var articlesHTML = "";
       data.standings[0].table.forEach(function (article) {
+        let urlTeamImage = article.team.crestUrl;
+        if (urlTeamImage == null || urlTeamImage == '') {
+          urlTeamImage = 'https://via.placeholder.com/350';
+        } else {
+          urlTeamImage = urlTeamImage.replace(/^http:\/\//i, 'https://');
+        }
         articlesHTML += `
                     <tr>
                       <td>${article.position}</td>
-                      <td>${article.team.name}</td>
+                      <td>
+                        <ul style="margin:0">
+                          <a href="./article.html?id=${article.team.id}">
+                            <li class="collection-item avatar" style="display:flex;align-items:center">
+                              <img src="${urlTeamImage}" width="15px" alt="" class="circle"> &emsp;
+                              <span class="title">${article.team.name}</span>
+                            </li>
+                          </a>
+                        </ul>
+                      </td>
                       <td>${article.playedGames}</td>
                       <td>${article.won}</td>
                       <td>${article.draw}</td>
                       <td>${article.lost}</td>
                       <td>${article.points}</td>
-                      <td><a class="waves-effect waves-light btn">Detail</a></td>
                     </tr>
                 `;
       });
@@ -101,7 +129,7 @@ function getTimById() {
     var idParam = urlParams.get("id");
 
     if ("caches" in window) {
-      caches.match(base_url + "article/" + idParam).then(function (response) {
+      caches.match(base_url + "teams/" + idParam).then(function (response) {
         if (response) {
           response.json().then(function (data) {
             var articleHTML = `
