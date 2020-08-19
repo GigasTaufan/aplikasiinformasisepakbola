@@ -16,7 +16,7 @@
   <!-- Navigasi -->
   <nav class="red lighten-3" role="navigation">
     <div class="nav-wrapper container">
-      <a href="#" class="brand-logo" id="logo-container">Premier League</a>
+      <a href="#home" class="brand-logo" id="logo-container">Premier League</a>
       <a href="./index.html" class="sidenav-trigger" data-target="nav-mobile">
         <i class="material-icons">arrow_back</i>
       </a>
@@ -31,6 +31,12 @@
   <div class="fixed-action-btn">
     <a class="btn-floating btn-large red" id="save">
       <i class="large material-icons">save</i>
+    </a>
+  </div>
+
+  <div class="fixed-action-btn">
+    <a class="btn-floating btn-large red darken-2" id="delete">
+      <i class="large material-icons">delete</i>
     </a>
   </div>
 
@@ -56,28 +62,65 @@
     } else {
       console.log("ServiceWorker belum didukung browser ini.");
     }
-    document.addEventListener("DOMContentLoaded", function () {
-      getTimById();
-    });
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   getTimById();
+    // });
 
-    document.addEventListener("DOMContentLoaded", function () {
+    // document.addEventListener("DOMContentLoaded", function () {
+    //   var urlParams = new URLSearchParams(window.location.search);
+    //   var isFromSaved = urlParams.get("saved");
+    //   var btnSave = document.getElementById("save");
+    //   if (isFromSaved) {
+    //     // Hide fab jika dimuat dari indexed db
+    //     btnSave.style.display = 'none';
+
+    //     // ambil artikel lalu tampilkan
+    //     getSavedArticleById();
+    //   } else {
+    //     var item = getTimById();
+    //   }
+    //   btnSave.onclick = function () {
+    //     console.log("Tombol FAB di klik.");
+    //     item.then(function (article) {
+    //       saveForLater(article);
+    //     });
+    //   };
+    // });
+    document.addEventListener('DOMContentLoaded', function () {
       var urlParams = new URLSearchParams(window.location.search);
-      var isFromSaved = urlParams.get("saved");
-      var btnSave = document.getElementById("save");
-      if (isFromSaved) {
-        // Hide fab jika dimuat dari indexed db
-        btnSave.style.display = 'none';
+      var id = Number(urlParams.get('id'));
 
-        // ambil artikel lalu tampilkan
-        getSavedArticleById();
-      } else {
-        var item = getTimById();
-      }
-      btnSave.onclick = function () {
-        console.log("Tombol FAB di klik.");
-        item.then(function (article) {
+      var save = document.getElementById('save');
+      var del = document.getElementById('delete');
+
+      var tim = getTimById();
+
+      getById(id)
+        .then((msg) => {
+          console.log(msg);
+          save.style.display = 'none';
+          del.style.display = 'block';
+        })
+        .catch((msg) => {
+          console.log(msg);
+          save.style.display = 'block';
+          del.style.display = 'none';
+        });
+
+      del.onclick = function () {
+        console.log('Tombol delete di klik.');
+        deleteFavTeam(id);
+        del.style.display = 'none';
+        save.style.display = 'block';
+      };
+
+      save.onclick = function () {
+        console.log('Tombol FAB di klik.');
+        tim.then(function (article) {
           saveForLater(article);
         });
+        save.style.display = 'none';
+        del.style.display = 'block';
       };
     });
   </script>
