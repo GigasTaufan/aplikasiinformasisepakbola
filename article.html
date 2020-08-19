@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <title>News Reader</title>
+  <title>Submission 2 - Tim</title>
   <meta name="description" content="My first PWA" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/materialize.min.css" />
@@ -57,7 +57,7 @@
       console.log("ServiceWorker belum didukung browser ini.");
     }
     document.addEventListener("DOMContentLoaded", function () {
-      getArticleById();
+      getTimById();
     });
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -71,7 +71,7 @@
         // ambil artikel lalu tampilkan
         getSavedArticleById();
       } else {
-        var item = getArticleById();
+        var item = getTimById();
       }
       btnSave.onclick = function () {
         console.log("Tombol FAB di klik.");
