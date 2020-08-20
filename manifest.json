@@ -1,16 +1,15 @@
 {
     "name": "Premier League",
+    "gcm_sender_id": "316615818022",
     "short_name": "PL",
     "description": "Aplikasi Premier League",
     "start_url": "/index.html",
     "display": "standalone",
     "background_color": "#ef9a9a",
     "theme_color": "#ef9a9a",
-    "icons": [
-        {
-            "src": "images/icon.png",
-            "sizes": "512x512",
-            "type": "image/png"
-        }
-    ]
+    "icons": [{
+        "src": "images/icon.png",
+        "sizes": "512x512",
+        "type": "image/png"
+    }]
 }
