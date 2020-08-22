@@ -4,13 +4,16 @@ var urlsToCache = [
   "/nav.html",
   "/index.html",
   "/article.html",
+  "/manifest.json",
   "/pages/home.html",
   "/pages/tim_favorit.html",
   "/css/materialize.min.css",
-  "/js/materialize.min.js",
-  "/manifest.json",
-  "/js/nav.js",
   "/js/api.js",
+  "/js/db.js",
+  "/js/idb.js",
+  "/js/materialize.min.js",
+  "/js/nav.js",
+  "/js/script.js",
   "/images/icon.png",
   "/images/icon-192.png",
   "/images/icon-512.png"
@@ -62,25 +65,22 @@ self.addEventListener("activate", function (event) {
   );
 });
 
-// self.addEventListener('push', function (event) {
-//   var body;
-//   if (event.data) {
-//     body = event.data.text();
-//   } else {
-//     body = 'Push message no payload';
-//   }
 
-//   var options = {
-//     body: body,
-//     icon: 'images/icon.png',
-//     vibrate: [100, 50, 100],
-//     data: {
-//       dateOfArrival: Date.now(),
-//       primaryKey: 1
-//     }
-//   };
-
-//   event.waitUntil(
-//     self.registration.showNotification('Push Notification', options)
-//   );
-// });
+self.addEventListener('push', function (event) {
+  var body;
+  if (event.data) {
+    body = event.data.text();
+  } else {
+    body = 'Push message no payload';
+  }
+  var options = {
+    body: body,
+    icon: 'icon.png',
+    vibrate: [100, 50, 100],
+    data: {
+      dateOfArrival: Date.now(),
+      primaryKey: 1,
+    },
+  };
+  event.waitUntil(self.registration.showNotification('Push Notification', options));
+});

@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
   loadPage(page);
 
   function loadPage(page) {
+    // fetch('pages/' + page + '.html')
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
       if (this.readyState == 4) {
@@ -64,5 +65,4 @@ document.addEventListener("DOMContentLoaded", function () {
     xhttp.open("GET", "pages/" + page + ".html", true);
     xhttp.send();
   }
-
 });
