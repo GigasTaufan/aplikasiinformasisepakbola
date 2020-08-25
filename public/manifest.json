@@ -5,8 +5,8 @@
     "description": "Aplikasi Premier League",
     "start_url": "/index.html",
     "display": "standalone",
-    "background_color": "#ef9a9a",
-    "theme_color": "#ef9a9a",
+    "background_color": "#5e35b1",
+    "theme_color": "#5e35b1",
     "icons": [{
             "src": "images/icon-512.png",
             "sizes": "512x512",
