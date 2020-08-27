@@ -26,7 +26,11 @@
   </nav>
   <!-- Akhir Navigasi -->
 
-  <div class="container" id="body-content"></div>
+  <div class="container">
+    <div class="container">
+      <div class="col s6" id="body-content"></div>
+    </div>
+  </div>
 
   <div class="fixed-action-btn">
     <a class="btn-floating btn-large red" id="save">
@@ -62,30 +66,7 @@
     } else {
       console.log("ServiceWorker belum didukung browser ini.");
     }
-    // document.addEventListener("DOMContentLoaded", function () {
-    //   getTimById();
-    // });
 
-    // document.addEventListener("DOMContentLoaded", function () {
-    //   var urlParams = new URLSearchParams(window.location.search);
-    //   var isFromSaved = urlParams.get("saved");
-    //   var btnSave = document.getElementById("save");
-    //   if (isFromSaved) {
-    //     // Hide fab jika dimuat dari indexed db
-    //     btnSave.style.display = 'none';
-
-    //     // ambil artikel lalu tampilkan
-    //     getSavedArticleById();
-    //   } else {
-    //     var item = getTimById();
-    //   }
-    //   btnSave.onclick = function () {
-    //     console.log("Tombol FAB di klik.");
-    //     item.then(function (article) {
-    //       saveForLater(article);
-    //     });
-    //   };
-    // });
     document.addEventListener('DOMContentLoaded', function () {
       var urlParams = new URLSearchParams(window.location.search);
       var id = Number(urlParams.get('id'));

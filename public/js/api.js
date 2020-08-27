@@ -4,8 +4,6 @@ const konfigurasi = {
   league_id: '2021'
 }
 
-// const base_url = 'https://api.football-data.org/v2/';
-// const api_token = '89e4a375e3f74c819e36b74a5065fcb8';
 
 let fetchData = (url) => {
   return fetch(url, {
@@ -282,16 +280,17 @@ function getSavedTimFavorit() {
         urlTeamImage = urlTeamImage.replace(/^http:\/\//i, 'https://');
       }
       articlesHTML += `
-                  <div class="card" style="width:200px">
-                    <a href="./article.html?id=${article.id}">
-                      <div class="card-image waves-effect waves-block waves-light">
-                        <img class="responsive-img" style="height:200px" src="${urlTeamImage}"/>
-                      </div>
-                    </a>
-                    <div class="card-content">
-                      <span class="card-title center-align">${article.name}</span>
-                    </div>
-                  </div>
+          <div class="card" style="width:200px">
+            <a href="./article.html?id=${article.id}">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="responsive-img" style="height:200px" src="${urlTeamImage}"/>
+              </div>
+            </a>
+            <div class="card-content">
+              <span class="card-title center-align">${article.name}</span>
+            </div>
+          </div>
+                  
       `;
     });
     // Sisipkan komponen card ke dalam elemen dengan id #body-content
@@ -306,16 +305,16 @@ function getSavedArticleById() {
   getById(idParam).then(function (article) {
     articleHTML = '';
     var articleHTML = `
-      <div class="card" style="width:200px">
-        <a href="./article.html?id=${article.id}">
-          <div class="card-image waves-effect waves-block waves-light">
-            <img class="responsive-img" style="height:200px" src="${urlTeamImage}"/>
+          <div class="card" style="width:200px">
+            <a href="./article.html?id=${article.id}">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="responsive-img" style="height:200px" src="${urlTeamImage}"/>
+              </div>
+            </a>
+            <div class="card-content">
+              <span class="card-title center-align">${article.name}</span>
+            </div>
           </div>
-        </a>
-        <div class="card-content">
-          <span class="card-title center-align">${article.name}</span>
-        </div>
-      </div>
     `;
     document.getElementById("body-content").innerHTML = articleHTML;
   });
